@@ -1,77 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K-Blow ZM | Lik-Mar Studios</title>
+<title>K-Blow ZM</title>
 
 <style>
 body {
-  margin: 0;
+  margin:0;
+  background:black;
+  color:white;
   font-family: Arial;
-  background: #0d0d0d;
-  color: white;
 }
 
+/* HEADER */
 header {
-  text-align: center;
-  padding: 20px;
-  background: black;
+  text-align:center;
+  padding:30px 15px;
+}
+header h1 {
+  font-size:40px;
+  color:#00ffcc;
 }
 
-h1 {
-  color: #00ffcc;
-}
-
-.banner img {
-  width: 100%;
-  border-bottom: 2px solid #00ffcc;
-}
-
-.search {
-  text-align: center;
-  margin: 20px;
-}
-
+/* SEARCH */
 input {
-  padding: 10px;
-  width: 80%;
-  border-radius: 10px;
-  border: none;
+  width:100%;
+  padding:15px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:20px;
+  font-size:16px;
 }
 
+/* CONTAINER */
+.container {
+  padding:15px;
+}
+
+/* SONG CARD */
 .song {
-  background: #1a1a1a;
-  margin: 15px;
-  padding: 15px;
-  border-radius: 10px;
+  background:#111;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:15px;
 }
 
-.song img {
-  width: 100%;
-  border-radius: 10px;
+.song h3 {
+  font-size:22px;
 }
 
+/* AUDIO */
 audio {
-  width: 100%;
-  margin-top: 10px;
+  width:100%;
+  margin-top:10px;
 }
 
-.btn {
-  display: inline-block;
-  margin: 5px;
-  padding: 10px;
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
+/* BUTTON */
+.download-btn {
+  display:inline-block;
+  margin-top:10px;
+  padding:12px 20px;
+  background:green;
+  color:white;
+  border-radius:8px;
+  text-decoration:none;
 }
 
-.download { background: green; }
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: black;
+/* PAGINATION */
+.nav {
+  text-align:center;
+  margin:30px;
+}
+.nav a {
+  padding:12px 20px;
+  background:#00ffcc;
+  color:black;
+  border-radius:10px;
+  text-decoration:none;
+  margin:5px;
 }
 </style>
 </head>
@@ -80,101 +86,45 @@ footer {
 
 <header>
   <h1>🎤 K-Blow ZM</h1>
-  <p>Lik-Mar Studios | Prod. FunkySheny</p>
+  <p>Stream • Download • Enjoy</p>
 </header>
 
-<div class="banner">
-  <img src="cover.jpg">
+<div class="container">
+
+<input type="text" placeholder="Search songs...">
+
+<!-- SONG 1 -->
+<div class="song">
+<h3>African Girl Is Beautiful</h3>
+<audio controls>
+<source src="K-Blow-Zm-African-beautiful.mp3" type="audio/mpeg">
+</audio>
+<a href="K-Blow-Zm-African-beautiful.mp3" class="download-btn">⬇ Download</a>
 </div>
 
-<div class="search">
-  <input type="text" id="search" placeholder="Search songs...">
+<!-- SONG 2 -->
+<div class="song">
+<h3>Muli Wandi</h3>
+<audio controls>
+<source src="K-Blow-Zm-Happy-Anniversary-Baby.mp3" type="audio/mpeg">
+</audio>
+<a href="K-Blow-Zm-Happy-Anniversary-Baby.mp3" class="download-btn">⬇ Download</a>
 </div>
 
-<div id="songs"></div>
+<!-- SONG 3 -->
+<div class="song">
+<h3>You Are My Medicine</h3>
+<audio controls>
+<source src="K-Blow-Zm-You-Are-My-Medicine.mp3" type="audio/mpeg">
+</audio>
+<a href="K-Blow-Zm-You-Are-My-Medicine.mp3" class="download-btn">⬇ Download</a>
+</div>
 
-<footer>
-  <h3>Follow</h3>
-  <a href="https://wa.me/260XXXXXXX" class="btn download">WhatsApp</a>
-  <a href="https://tiktok.com/@yourname" class="btn download">TikTok</a>
-  <a href="https://youtube.com/@yourname" class="btn download">YouTube</a>
-  <p>© 2026 K-Blow ZM</p>
-</footer>
+</div>
 
-<script>
-let currentAudio = null;
-
-const songs = [
-  {
-    title: "African Girl Is Beautiful",
-    file: "song1.mp3",
-    cover: "cover1.jpg"
-  },
-  {
-    title: "Muli Wandi",
-    file: "song2.mp3",
-    cover: "cover2.jpg"
-  },
-  {
-    title: "Nsale Neka",
-    file: "song3.mp3",
-    cover: "cover3.jpg"
-  },
-  {
-    title: "Tule Bomba",
-    file: "song4.mp3",
-    cover: "cover4.jpg"
-  },
-  {
-    title: "Ma Pressure",
-    file: "song5.mp3",
-    cover: "cover5.jpg"
-  }
-];
-
-function displaySongs(list) {
-  const container = document.getElementById("songs");
-  container.innerHTML = "";
-
-  list.forEach(song => {
-    const songDiv = document.createElement("div");
-    songDiv.className = "song";
-
-    songDiv.innerHTML = `
-      <img src="${song.cover}">
-      <h3>${song.title}</h3>
-      <audio controls>
-        <source src="${song.file}" type="audio/mpeg">
-      </audio>
-      <br>
-      <a href="${song.file}" download class="btn download">⬇ Download</a>
-    `;
-
-    const audio = songDiv.querySelector("audio");
-
-    audio.addEventListener("play", () => {
-      if (currentAudio && currentAudio !== audio) {
-        currentAudio.pause();
-      }
-      currentAudio = audio;
-    });
-
-    container.appendChild(songDiv);
-  });
-}
-
-displaySongs(songs);
-
-document.getElementById("search").addEventListener("input", function() {
-  const value = this.value.toLowerCase();
-
-  const filtered = songs.filter(song =>
-    song.title.toLowerCase().includes(value)
-  );
-
-  displaySongs(filtered);
-});
-</script>
+<div class="nav">
+  <a href="page2.html">Next ▶</a>
+</div>
 
 </body>
 </html>
