@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-Blow ZM | Lik-Mar Studios</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0d0d0d;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  background: black;
+}
+
+h1 {
+  color: #00ffcc;
+}
+
+.banner img {
+  width: 100%;
+  border-bottom: 2px solid #00ffcc;
+}
+
+.search {
+  text-align: center;
+  margin: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 80%;
+  border-radius: 10px;
+  border: none;
+}
+
+.song {
+  background: #1a1a1a;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.song img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+}
+
+.download { background: green; }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: black;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎤 K-Blow ZM</h1>
+  <p>Lik-Mar Studios | Prod. FunkySheny</p>
+</header>
+
+<div class="banner">
+  <img src="cover.jpg">
+</div>
+
+<div class="search">
+  <input type="text" id="search" placeholder="Search songs...">
+</div>
+
+<div id="songs"></div>
+
+<footer>
+  <h3>Follow</h3>
+  <a href="https://wa.me/260XXXXXXX" class="btn download">WhatsApp</a>
+  <a href="https://tiktok.com/@yourname" class="btn download">TikTok</a>
+  <a href="https://youtube.com/@yourname" class="btn download">YouTube</a>
+  <p>© 2026 K-Blow ZM</p>
+</footer>
+
+<script>
+let currentAudio = null;
+
+const songs = [
+  {
+    title: "African Girl Is Beautiful",
+    file: "song1.mp3",
+    cover: "cover1.jpg"
+  },
+  {
+    title: "Muli Wandi",
+    file: "song2.mp3",
+    cover: "cover2.jpg"
+  },
+  {
+    title: "Nsale Neka",
+    file: "song3.mp3",
+    cover: "cover3.jpg"
+  },
+  {
+    title: "Tule Bomba",
+    file: "song4.mp3",
+    cover: "cover4.jpg"
+  },
+  {
+    title: "Ma Pressure",
+    file: "song5.mp3",
+    cover: "cover5.jpg"
+  }
+];
+
+function displaySongs(list) {
+  const container = document.getElementById("songs");
+  container.innerHTML = "";
+
+  list.forEach(song => {
+    const songDiv = document.createElement("div");
+    songDiv.className = "song";
+
+    songDiv.innerHTML = `
+      <img src="${song.cover}">
+      <h3>${song.title}</h3>
+      <audio controls>
+        <source src="${song.file}" type="audio/mpeg">
+      </audio>
+      <br>
+      <a href="${song.file}" download class="btn download">⬇ Download</a>
+    `;
+
+    const audio = songDiv.querySelector("audio");
+
+    audio.addEventListener("play", () => {
+      if (currentAudio && currentAudio !== audio) {
+        currentAudio.pause();
+      }
+      currentAudio = audio;
+    });
+
+    container.appendChild(songDiv);
+  });
+}
+
+displaySongs(songs);
+
+document.getElementById("search").addEventListener("input", function() {
+  const value = this.value.toLowerCase();
+
+  const filtered = songs.filter(song =>
+    song.title.toLowerCase().includes(value)
+  );
+
+  displaySongs(filtered);
+});
+</script>
+
+</body>
+</html>
